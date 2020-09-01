@@ -2,6 +2,10 @@ import React from 'react';
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 
+
+
+
+
 const todoData = [
   {
     task: 'Organize Garage',
@@ -14,11 +18,7 @@ const todoData = [
     completed: false
   }
 ];
-const initialState = {
-  taks:"",
-  id:"",
-  completed:"false"
-}
+
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -68,9 +68,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header><h1>Todo List: MVP</h1></header>
-        <TodoList datas={this.state.datas} toggleCompleted={this.toggleCompleted}/>
-        <TodoForm addTask={this.addTask} clearCompleted={this.clearCompleted}/>
+        <header><h1 className="header">Todo List: MVP</h1></header>
+
+        <TodoList 
+        datas={this.state.datas} 
+        toggleCompleted={this.toggleCompleted}
+        />
+
+        <TodoForm 
+        addTask={this.addTask} 
+        clearCompleted={this.clearCompleted}
+        />
       </div>
     );
   }
