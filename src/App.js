@@ -21,16 +21,42 @@ class App extends React.Component {
   constructor () {
     super ();
     this.state = {
-      data: todoData,
+      datas: todoData,
+      toggleCompleted: () => {},
     }
+  }
+
+  toggleCompleted = (listId) =>{
+    this.setState({
+      data: this.state.datas.map((data) => {
+        if (data.id === listId){
+          return {
+            ...data, 
+            completed: !data.completed
+          }
+        } else {
+          return data
+        }
+      })
+    })
+  }
+  addTask = (taskName) => {
+    const newTask = {
+      task: taskName,
+      id: new Date(),
+      completed: false
+    }
+    this.setState({
+      datas: [...this.state.datas, newTask]
+    })
   }
   render() {
     return (
       <div className="App">
         <header><h1>Todo List: MVP</h1></header>
-        <TodoForm />
+        <TodoForm addTask={this.addTask}/>
 
-        <TodoList datas={this.state.data}/>
+        <TodoList datas={this.state.datas} toggleCompleted={this.toggleCompleted}/>
       </div>
     );
   }
