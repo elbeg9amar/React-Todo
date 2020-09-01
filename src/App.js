@@ -14,6 +14,11 @@ const todoData = [
     completed: false
   }
 ];
+const initialState = {
+  taks:"",
+  id:"",
+  completed:"false"
+}
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -25,10 +30,11 @@ class App extends React.Component {
       toggleCompleted: () => {},
     }
   }
+ 
 
   toggleCompleted = (listId) =>{
     this.setState({
-      data: this.state.datas.map((data) => {
+      datas: this.state.datas.map((data) => {
         if (data.id === listId){
           return {
             ...data, 
@@ -50,13 +56,21 @@ class App extends React.Component {
       datas: [...this.state.datas, newTask]
     })
   }
+
+  clearCompleted = e => {
+    e.preventDefault();
+    this.setState({
+      datas: this.state.datas.filter(item => !item.completed)
+    })
+
+  }
+  
   render() {
     return (
       <div className="App">
         <header><h1>Todo List: MVP</h1></header>
-        <TodoForm addTask={this.addTask}/>
-
         <TodoList datas={this.state.datas} toggleCompleted={this.toggleCompleted}/>
+        <TodoForm addTask={this.addTask} clearCompleted={this.clearCompleted}/>
       </div>
     );
   }
